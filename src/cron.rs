@@ -50,7 +50,7 @@ impl CronSpec {
         } else if self.dow_any {
             dom_match
         } else {
-            dom_match || dow_match
+            dom_match && dow_match
         }
     }
 }
