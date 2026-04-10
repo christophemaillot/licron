@@ -193,7 +193,7 @@ fn set_process_timezone(name: &str) -> Result<(), String> {
 }
 
 #[repr(C)]
-#[derive(Default, Copy, Clone)]
+#[derive(Copy, Clone)]
 struct Tm {
     tm_sec: i32,
     tm_min: i32,
@@ -206,6 +206,24 @@ struct Tm {
     tm_isdst: i32,
     tm_gmtoff: i64,
     tm_zone: *const u8,
+}
+
+impl Default for Tm {
+    fn default() -> Self {
+        Self {
+            tm_sec: 0,
+            tm_min: 0,
+            tm_hour: 0,
+            tm_mday: 0,
+            tm_mon: 0,
+            tm_year: 0,
+            tm_wday: 0,
+            tm_yday: 0,
+            tm_isdst: 0,
+            tm_gmtoff: 0,
+            tm_zone: std::ptr::null(),
+        }
+    }
 }
 
 unsafe extern "C" {
